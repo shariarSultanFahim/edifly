@@ -19,7 +19,36 @@ function CreateCardForm() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [createdCardId, setCreatedCardId] = useState(null);
+  const [aiGenerating, setAiGenerating] = useState(false);
   const cardRef = useRef(null);
+  const aiAbortRef = useRef(false);
+
+  const handleAiGenerate = async () => {
+    if (aiGenerating) return;
+    setAiGenerating(true);
+    aiAbortRef.current = false;
+    setMessage("");
+
+    try {
+      const res = await fetch("/api/ai-message");
+      const data = await res.json();
+
+      if (!res.ok || !data.message) {
+        throw new Error("Failed to generate");
+      }
+
+      const text = data.message;
+      for (let i = 0; i < text.length; i++) {
+        if (aiAbortRef.current) break;
+        await new Promise((resolve) => setTimeout(resolve, 18 + Math.random() * 22));
+        setMessage((prev) => prev + text[i]);
+      }
+    } catch {
+      setError("Could not generate a message. Please try again.");
+    } finally {
+      setAiGenerating(false);
+    }
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -224,21 +253,44 @@ function CreateCardForm() {
 
             {/* Message */}
             <div className="form-group">
-              <label className="form-label" htmlFor="message">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
-                </svg>
-                Your Message
-              </label>
-              <textarea
-                id="message"
-                value={message}
-                onChange={(e) => setMessage(e.target.value)}
-                placeholder="Write your heartfelt Eid message..."
-                className="form-textarea"
-                rows={4}
-                maxLength={300}
-              />
+              <div className="form-label-row">
+                <label className="form-label" htmlFor="message">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+                  </svg>
+                  Your Message
+                </label>
+                <button
+                  type="button"
+                  className={`btn-ai-generate ${aiGenerating ? "ai-active" : ""}`}
+                  onClick={handleAiGenerate}
+                  disabled={aiGenerating}
+                  title="Generate message with AI"
+                  id="ai-generate-button"
+                >
+                  <svg className="ai-star-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 16.8l-6.2 4.5 2.4-7.4L2 9.4h7.6z" />
+                  </svg>
+                  {aiGenerating ? "Writing..." : "AI Write"}
+                </button>
+              </div>
+              <div className={`textarea-wrapper ${aiGenerating ? "ai-typing" : ""}`}>
+                <textarea
+                  id="message"
+                  value={message}
+                  onChange={(e) => {
+                    if (aiGenerating) {
+                      aiAbortRef.current = true;
+                    }
+                    setMessage(e.target.value);
+                  }}
+                  placeholder="Write your heartfelt Eid message..."
+                  className="form-textarea"
+                  rows={4}
+                  maxLength={300}
+                />
+                {aiGenerating && <span className="ai-cursor">|</span>}
+              </div>
               <div className="char-count">{message.length}/300</div>
             </div>
 
