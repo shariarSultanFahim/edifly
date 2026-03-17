@@ -41,10 +41,9 @@ export default function ShareActions({ cardId, cardRef }) {
         logging: false,
       });
 
-      const footerHeight = Math.max(64, Math.round(cardCanvas.height * 0.08));
       const finalCanvas = document.createElement("canvas");
       finalCanvas.width = cardCanvas.width;
-      finalCanvas.height = cardCanvas.height + footerHeight;
+      finalCanvas.height = cardCanvas.height;
       const context = finalCanvas.getContext("2d");
 
       if (!context) {
@@ -52,17 +51,15 @@ export default function ShareActions({ cardId, cardRef }) {
       }
 
       context.drawImage(cardCanvas, 0, 0);
-      context.fillStyle = "#0a0e1a";
-      context.fillRect(0, cardCanvas.height, finalCanvas.width, footerHeight);
 
-      context.fillStyle = "rgba(212, 175, 55, 0.95)";
-      context.font = `${Math.max(20, Math.round(footerHeight * 0.42))}px system-ui, sans-serif`;
+      context.fillStyle = "rgba(255, 255, 255, 0.9)";
+      context.font = `${Math.max(18, Math.round(cardCanvas.height * 0.035))}px system-ui, sans-serif`;
       context.textAlign = "center";
-      context.textBaseline = "middle";
+      context.textBaseline = "bottom";
       context.fillText(
-        "Created with EidiFly / fa-m.dev",
+        "Created with EdiFly by fa-m.dev",
         finalCanvas.width / 2,
-        cardCanvas.height + footerHeight / 2,
+        finalCanvas.height - Math.max(14, Math.round(cardCanvas.height * 0.03)),
       );
 
       const link = document.createElement("a");

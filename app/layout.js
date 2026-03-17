@@ -102,7 +102,7 @@ export const metadata = {
     type: "website",
     images: [
       {
-        url: "/opengraph-image",
+        url: "https://eidifly.fa-m.dev/opengraph-image.png",
         width: 1200,
         height: 630,
         alt: "EidiFly — Create & Share Beautiful Eid Greeting Cards",
@@ -114,7 +114,7 @@ export const metadata = {
     title: "EidiFly — Create & Share Beautiful Eid Greeting Cards",
     description:
       "Design stunning Eid Mubarak virtual cards. Choose templates, add your message, and share with loved ones instantly.",
-    images: ["/opengraph-image"],
+    images: ["https://eidifly.fa-m.dev/opengraph-image.png"],
   },
   robots: {
     index: true,

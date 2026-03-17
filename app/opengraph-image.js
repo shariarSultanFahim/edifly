@@ -39,14 +39,16 @@ export default function Image() {
 
       <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
         <div style={{ fontSize: 78, fontWeight: 700, lineHeight: 1.02 }}>
-          Eid Mubarak
+          Eid Mubarak Cards
         </div>
         <div style={{ fontSize: 36, opacity: 0.92 }}>
-          Create and share beautiful greeting cards instantly
+          Create and share beautiful greetings in seconds
         </div>
       </div>
 
-      <div style={{ fontSize: 26, opacity: 0.88 }}>eidifly.fa-m.dev</div>
+      <div style={{ fontSize: 28, fontWeight: 600, opacity: 0.95 }}>
+        Create yours now at eidifly.fa-m.dev
+      </div>
     </div>,
     {
       ...size,

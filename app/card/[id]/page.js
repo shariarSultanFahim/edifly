@@ -4,14 +4,16 @@ import CardViewClient from "./CardViewClient";
 export async function generateMetadata({ params }) {
   const { id } = await params;
   const card = decodeCardData(id);
+  const recipientName = card?.recipientName?.trim();
+  const senderName = card?.senderName?.trim();
 
-  const title = card?.recipientName
-    ? `Eid card for ${card.recipientName}`
-    : "Shared Eid Greeting Card";
+  const title = recipientName
+    ? `A Beautiful Eid Greeting Card for ${recipientName} — Shared with Love`
+    : "A Beautiful Shared Eid Greeting Card — Open and Celebrate";
 
-  const description = card?.senderName
-    ? `A special Eid card from ${card.senderName}. Open to view the full greeting.`
-    : "A special Eid card has been shared with you. Open to view the full greeting.";
+  const description = senderName
+    ? `Celebrate this blessed occasion with a heartfelt Eid message from ${senderName}. Open this card to view the full greeting and share the joy with your loved ones.`
+    : "Celebrate this blessed occasion with a heartfelt Eid message. Open this card to view the full greeting and share the joy with your loved ones.";
 
   return {
     title,
@@ -20,12 +22,13 @@ export async function generateMetadata({ params }) {
       title,
       description,
       type: "website",
+      url: `/card/${id}`,
       images: [
         {
-          url: "/opengraph-image",
+          url: "https://eidifly.fa-m.dev/opengraph-image.png",
           width: 1200,
           height: 630,
-          alt: "Shared Eid greeting card preview",
+          alt: "EidiFly Eid greeting card preview image",
         },
       ],
     },
@@ -33,7 +36,7 @@ export async function generateMetadata({ params }) {
       card: "summary_large_image",
       title,
       description,
-      images: ["/opengraph-image"],
+      images: ["https://eidifly.fa-m.dev/opengraph-image.png"],
     },
   };
 }
