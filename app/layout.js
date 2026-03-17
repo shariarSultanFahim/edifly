@@ -1,4 +1,14 @@
-import { Manrope, Playfair_Display, Dancing_Script, Lora, Amiri, Great_Vibes, Cormorant_Garamond, Merriweather, Caveat } from "next/font/google";
+import {
+  Amiri,
+  Caveat,
+  Cormorant_Garamond,
+  Dancing_Script,
+  Great_Vibes,
+  Lora,
+  Manrope,
+  Merriweather,
+  Playfair_Display,
+} from "next/font/google";
 import "./globals.css";
 
 const manrope = Manrope({
@@ -92,7 +102,7 @@ export const metadata = {
     type: "website",
     images: [
       {
-        url: "/opengraph-image.png",
+        url: "/opengraph-image",
         width: 1200,
         height: 630,
         alt: "EidiFly — Create & Share Beautiful Eid Greeting Cards",
@@ -104,7 +114,7 @@ export const metadata = {
     title: "EidiFly — Create & Share Beautiful Eid Greeting Cards",
     description:
       "Design stunning Eid Mubarak virtual cards. Choose templates, add your message, and share with loved ones instantly.",
-    images: ["/opengraph-image.png"],
+    images: ["/opengraph-image"],
   },
   robots: {
     index: true,
@@ -114,9 +124,18 @@ export const metadata = {
 };
 
 const fontClasses = [
-  manrope, playfair, dancingScript, lora, amiri,
-  greatVibes, cormorant, merriweather, caveat,
-].map((f) => f.variable).join(" ");
+  manrope,
+  playfair,
+  dancingScript,
+  lora,
+  amiri,
+  greatVibes,
+  cormorant,
+  merriweather,
+  caveat,
+]
+  .map((f) => f.variable)
+  .join(" ");
 
 export default function RootLayout({ children }) {
   return (

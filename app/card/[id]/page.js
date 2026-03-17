@@ -1,88 +1,44 @@
-"use client";
+import { decodeCardData } from "@/lib/storage";
+import CardViewClient from "./CardViewClient";
 
-import { useState, useEffect } from "react";
-import { useParams } from "next/navigation";
-import CardPreview from "@/components/CardPreview";
+export async function generateMetadata({ params }) {
+  const { id } = await params;
+  const card = decodeCardData(id);
 
-export default function CardViewPage() {
-  const { id } = useParams();
-  const [card, setCard] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const title = card?.recipientName
+    ? `Eid card for ${card.recipientName}`
+    : "Shared Eid Greeting Card";
 
-  useEffect(() => {
-    const fetchCard = async () => {
-      try {
-        const res = await fetch(`/api/cards/${id}`);
-        if (!res.ok) {
-          throw new Error("Card not found");
-        }
-        const data = await res.json();
-        setCard(data);
-      } catch (err) {
-        setError(err.message);
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchCard();
-  }, [id]);
+  const description = card?.senderName
+    ? `A special Eid card from ${card.senderName}. Open to view the full greeting.`
+    : "A special Eid card has been shared with you. Open to view the full greeting.";
 
-  if (loading) {
-    return (
-      <main className="card-view-page">
-        <div className="loading-container">
-          <span className="spinner large"></span>
-          <p>Loading your Eid card...</p>
-        </div>
-      </main>
-    );
-  }
+  return {
+    title,
+    description,
+    openGraph: {
+      title,
+      description,
+      type: "website",
+      images: [
+        {
+          url: `/card/${id}/opengraph-image`,
+          width: 1200,
+          height: 630,
+          alt: "Shared Eid greeting card preview",
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: [`/card/${id}/opengraph-image`],
+    },
+  };
+}
 
-  if (error || !card) {
-    return (
-      <main className="card-view-page">
-        <div className="error-container">
-          <div className="error-icon">😔</div>
-          <h1>Card Not Found</h1>
-          <p>Sorry, we couldn&apos;t find this greeting card.</p>
-          <a href="/" className="btn btn-hero">
-            Create a New Card
-          </a>
-        </div>
-      </main>
-    );
-  }
-
-  return (
-    <main className="card-view-page">
-      <div className="card-view-content">
-        <div className="card-view-header">
-          <h1 className="card-view-title">
-            ✦ Eid Mubarak ✦
-          </h1>
-          <p className="card-view-subtitle">
-            A special card has been shared with you
-          </p>
-        </div>
-
-        <div className="card-view-preview">
-          <CardPreview
-            templateId={card.templateId}
-            fontId={card.fontId}
-            recipientName={card.recipientName}
-            senderName={card.senderName}
-            message={card.message}
-          />
-        </div>
-      </div>
-
-      <footer className="site-footer">
-        <div className="footer-content">
-          <p>Made with ❤️ for the Eid Celebration</p>
-          <a href="/" className="footer-cta">Create your own Edifly →</a>
-        </div>
-      </footer>
-    </main>
-  );
+export default async function CardViewPage({ params }) {
+  const { id } = await params;
+  return <CardViewClient id={id} />;
 }
