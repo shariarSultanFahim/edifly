@@ -1,0 +1,16 @@
+{
+  "name": "EidiFly",
+  "short_name": "EidiFly",
+  "description": "Create & share beautiful Eid Mubarak greeting cards",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0a0e1a",
+  "theme_color": "#d4af37",
+  "icons": [
+    {
+      "src": "/icon.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
