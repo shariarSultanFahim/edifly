@@ -69,38 +69,72 @@ a {
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 @keyframes float {
-  0%, 100% { transform: translateY(0px) rotate(0deg); }
-  33% { transform: translateY(-15px) rotate(5deg); }
-  66% { transform: translateY(-8px) rotate(-3deg); }
+  0%,
+  100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  33% {
+    transform: translateY(-15px) rotate(5deg);
+  }
+  66% {
+    transform: translateY(-8px) rotate(-3deg);
+  }
 }
 
 @keyframes shimmer {
-  0% { background-position: -200% center; }
-  100% { background-position: 200% center; }
+  0% {
+    background-position: -200% center;
+  }
+  100% {
+    background-position: 200% center;
+  }
 }
 
 @keyframes twinkle {
-  0%, 100% { opacity: 0.3; transform: scale(1); }
-  50% { opacity: 1; transform: scale(1.5); }
+  0%,
+  100% {
+    opacity: 0.3;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.5);
+  }
 }
 
 @keyframes pulse-glow {
-  0%, 100% { box-shadow: 0 0 20px rgba(212, 175, 55, 0.1); }
-  50% { box-shadow: 0 0 40px rgba(212, 175, 55, 0.25); }
+  0%,
+  100% {
+    box-shadow: 0 0 20px rgba(212, 175, 55, 0.1);
+  }
+  50% {
+    box-shadow: 0 0 40px rgba(212, 175, 55, 0.25);
+  }
 }
 
 @keyframes spin {
-  to { transform: rotate(360deg); }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 @keyframes lantern-swing {
-  0%, 100% { transform: rotate(-2deg); }
-  50% { transform: rotate(2deg); }
+  0%,
+  100% {
+    transform: rotate(-2deg);
+  }
+  50% {
+    transform: rotate(2deg);
+  }
 }
 
 /* --- Buttons --- */
@@ -241,9 +275,21 @@ a {
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(circle at 20% 50%, rgba(212, 175, 55, 0.08) 0%, transparent 50%),
-    radial-gradient(circle at 80% 30%, rgba(106, 90, 205, 0.06) 0%, transparent 50%),
-    radial-gradient(circle at 50% 80%, rgba(212, 175, 55, 0.04) 0%, transparent 50%);
+    radial-gradient(
+      circle at 20% 50%,
+      rgba(212, 175, 55, 0.08) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      circle at 80% 30%,
+      rgba(106, 90, 205, 0.06) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      circle at 50% 80%,
+      rgba(212, 175, 55, 0.04) 0%,
+      transparent 50%
+    );
   pointer-events: none;
 }
 
@@ -279,7 +325,12 @@ a {
 
 .hero-title-accent {
   display: block;
-  background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 50%, var(--gold) 100%);
+  background: linear-gradient(
+    135deg,
+    var(--gold) 0%,
+    var(--gold-light) 50%,
+    var(--gold) 100%
+  );
   background-size: 200% auto;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -796,20 +847,41 @@ a {
 
 /* --- AI Message Generator --- */
 @keyframes ai-sparkle {
-  0%, 100% { transform: rotate(0deg) scale(1); }
-  25% { transform: rotate(-12deg) scale(1.15); }
-  50% { transform: rotate(8deg) scale(1.05); }
-  75% { transform: rotate(-5deg) scale(1.1); }
+  0%,
+  100% {
+    transform: rotate(0deg) scale(1);
+  }
+  25% {
+    transform: rotate(-12deg) scale(1.15);
+  }
+  50% {
+    transform: rotate(8deg) scale(1.05);
+  }
+  75% {
+    transform: rotate(-5deg) scale(1.1);
+  }
 }
 
 @keyframes ai-border-glow {
-  0%, 100% { border-color: rgba(168, 130, 255, 0.3); box-shadow: 0 0 12px rgba(168, 130, 255, 0.08); }
-  50% { border-color: rgba(168, 130, 255, 0.6); box-shadow: 0 0 24px rgba(168, 130, 255, 0.18); }
+  0%,
+  100% {
+    border-color: rgba(168, 130, 255, 0.3);
+    box-shadow: 0 0 12px rgba(168, 130, 255, 0.08);
+  }
+  50% {
+    border-color: rgba(168, 130, 255, 0.6);
+    box-shadow: 0 0 24px rgba(168, 130, 255, 0.18);
+  }
 }
 
 @keyframes blink {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0; }
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
 }
 
 .form-label-row {
@@ -828,7 +900,11 @@ a {
   font-size: 0.78rem;
   font-weight: 600;
   color: #c4a0ff;
-  background: linear-gradient(135deg, rgba(168, 130, 255, 0.12) 0%, rgba(120, 80, 220, 0.1) 100%);
+  background: linear-gradient(
+    135deg,
+    rgba(168, 130, 255, 0.12) 0%,
+    rgba(120, 80, 220, 0.1) 100%
+  );
   border: 1px solid rgba(168, 130, 255, 0.25);
   border-radius: 50px;
   cursor: pointer;
@@ -838,7 +914,11 @@ a {
 }
 
 .btn-ai-generate:hover:not(:disabled) {
-  background: linear-gradient(135deg, rgba(168, 130, 255, 0.22) 0%, rgba(120, 80, 220, 0.18) 100%);
+  background: linear-gradient(
+    135deg,
+    rgba(168, 130, 255, 0.22) 0%,
+    rgba(120, 80, 220, 0.18) 100%
+  );
   border-color: rgba(168, 130, 255, 0.5);
   box-shadow: 0 0 20px rgba(168, 130, 255, 0.15);
   transform: translateY(-1px);
@@ -857,7 +937,11 @@ a {
 }
 
 .btn-ai-generate.ai-active {
-  background: linear-gradient(135deg, rgba(168, 130, 255, 0.2) 0%, rgba(120, 80, 220, 0.15) 100%);
+  background: linear-gradient(
+    135deg,
+    rgba(168, 130, 255, 0.2) 0%,
+    rgba(120, 80, 220, 0.15) 100%
+  );
   border-color: rgba(168, 130, 255, 0.5);
   box-shadow: 0 0 18px rgba(168, 130, 255, 0.12);
 }
@@ -1021,7 +1105,7 @@ a {
 }
 
 .eid-title {
-  font-family: var(--font-heading);
+  font-family: inherit;
   font-size: clamp(1.8rem, 4vw, 2.5rem);
   font-weight: 700;
   letter-spacing: 1px;
@@ -1049,7 +1133,7 @@ a {
 }
 
 .card-sender {
-  font-family: var(--font-heading);
+  font-family: inherit;
   font-size: 1.1rem;
   font-weight: 600;
   margin-top: 8px;

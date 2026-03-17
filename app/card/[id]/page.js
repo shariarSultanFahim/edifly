@@ -22,7 +22,7 @@ export async function generateMetadata({ params }) {
       type: "website",
       images: [
         {
-          url: `/card/${id}/opengraph-image`,
+          url: "/opengraph-image",
           width: 1200,
           height: 630,
           alt: "Shared Eid greeting card preview",
@@ -33,7 +33,7 @@ export async function generateMetadata({ params }) {
       card: "summary_large_image",
       title,
       description,
-      images: [`/card/${id}/opengraph-image`],
+      images: ["/opengraph-image"],
     },
   };
 }
