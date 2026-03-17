@@ -80,10 +80,7 @@ export default function CardViewPage() {
       <footer className="site-footer">
         <div className="footer-content">
           <p>Made with ❤️ for the Eid Celebration</p>
-          <a href="/" className="footer-cta">Create your own Eid card →</a>
-          <a href="https://fa-m.dev/" target="_blank" rel="noopener noreferrer" className="footer-portfolio">
-            Built by fa-m.dev
-          </a>
+          <a href="/" className="footer-cta">Create your own Edifly →</a>
         </div>
       </footer>
     </main>
