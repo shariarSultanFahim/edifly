@@ -17,6 +17,8 @@ export default async function Image({ params }) {
   const message =
     card?.message?.trim() ||
     "May this blessed occasion bring peace, joy, and prosperity to you and your family.";
+  const headline = `Eid Mubarak, ${recipient}`;
+  const signature = `From ${sender}`;
 
   return new ImageResponse(
     <div
@@ -46,14 +48,14 @@ export default async function Image({ params }) {
 
       <div style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
         <div style={{ fontSize: 74, fontWeight: 700, lineHeight: 1.02 }}>
-          Eid Mubarak, {recipient}
+          {headline}
         </div>
         <div style={{ fontSize: 34, opacity: 0.92, maxWidth: "92%" }}>
           {message.length > 120 ? `${message.slice(0, 117)}...` : message}
         </div>
       </div>
 
-      <div style={{ fontSize: 30, opacity: 0.9 }}>From {sender}</div>
+      <div style={{ fontSize: 30, opacity: 0.9 }}>{signature}</div>
     </div>,
     {
       ...size,
