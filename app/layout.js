@@ -90,7 +90,7 @@ export const metadata = {
     "share Eid cards",
     "download Eid cards",
   ],
-  authors: [{ name: "fa-m.dev", url: "https://fa-m.dev/" }],
+  authors: [{ name: "Shariar Sultan Fahim", url: "https://fa-m.dev/" }],
   creator: "fa-m.dev",
   openGraph: {
     title: "EidiFly — Create & Share Beautiful Eid Greeting Cards",

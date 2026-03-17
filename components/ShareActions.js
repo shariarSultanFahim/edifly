@@ -31,44 +31,46 @@ export default function ShareActions({ cardId, cardRef }) {
   const handleDownload = async () => {
     if (!cardRef?.current) return;
     setDownloading(true);
+    let exportWrapper = null;
 
     try {
       const html2canvas = (await import("html2canvas")).default;
-      const cardCanvas = await html2canvas(cardRef.current, {
+      const exportCard = cardRef.current.cloneNode(true);
+      exportWrapper = document.createElement("div");
+      exportWrapper.style.position = "fixed";
+      exportWrapper.style.left = "-10000px";
+      exportWrapper.style.top = "0";
+      exportWrapper.style.pointerEvents = "none";
+      exportWrapper.style.zIndex = "-1";
+      exportWrapper.appendChild(exportCard);
+
+      const messageArea = exportCard.querySelector(".card-message-area");
+      if (messageArea) {
+        const credit = document.createElement("p");
+        credit.className = "card-message";
+        credit.textContent = "Created with EdiFly by fa-m.dev";
+        messageArea.appendChild(credit);
+      }
+
+      document.body.appendChild(exportWrapper);
+
+      const cardCanvas = await html2canvas(exportCard, {
         scale: 2,
         useCORS: true,
         backgroundColor: null,
         logging: false,
       });
 
-      const finalCanvas = document.createElement("canvas");
-      finalCanvas.width = cardCanvas.width;
-      finalCanvas.height = cardCanvas.height;
-      const context = finalCanvas.getContext("2d");
-
-      if (!context) {
-        throw new Error("Canvas context not available");
-      }
-
-      context.drawImage(cardCanvas, 0, 0);
-
-      context.fillStyle = "rgba(255, 255, 255, 0.9)";
-      context.font = `${Math.max(18, Math.round(cardCanvas.height * 0.035))}px system-ui, sans-serif`;
-      context.textAlign = "center";
-      context.textBaseline = "bottom";
-      context.fillText(
-        "Created with EdiFly by fa-m.dev",
-        finalCanvas.width / 2,
-        finalCanvas.height - Math.max(14, Math.round(cardCanvas.height * 0.03)),
-      );
-
       const link = document.createElement("a");
       link.download = `eid-card-${cardId}.png`;
-      link.href = finalCanvas.toDataURL("image/png");
+      link.href = cardCanvas.toDataURL("image/png");
       link.click();
     } catch (err) {
       console.error("Download failed:", err);
     } finally {
+      if (exportWrapper && document.body.contains(exportWrapper)) {
+        document.body.removeChild(exportWrapper);
+      }
       setDownloading(false);
     }
   };
