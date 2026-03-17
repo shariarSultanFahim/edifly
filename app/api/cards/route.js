@@ -1,5 +1,4 @@
-import { saveCard } from "@/lib/storage";
-import { nanoid } from "nanoid";
+import { encodeCardData } from "@/lib/storage";
 import { NextResponse } from "next/server";
 
 export async function POST(request) {
@@ -15,20 +14,18 @@ export async function POST(request) {
     }
 
     const card = {
-      id: nanoid(8),
       templateId,
       fontId: fontId || "playfair",
       recipientName: recipientName.trim(),
       senderName: senderName.trim(),
       message: message.trim(),
-      createdAt: new Date().toISOString(),
     };
 
-    saveCard(card);
+    const encoded = encodeCardData(card);
 
     return NextResponse.json({
-      id: card.id,
-      shareUrl: `/card/${card.id}`,
+      id: encoded,
+      shareUrl: `/card/${encoded}`,
     });
   } catch (error) {
     return NextResponse.json(
